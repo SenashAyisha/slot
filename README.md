@@ -1,5 +1,6 @@
 # Ex03 Time Table
 ## Date:
+Reference number:25018487
 
 ## AIM
 To write a html webpage page to display your slot timetable.
@@ -24,9 +25,186 @@ Add your timetable using ```<td>``` tag.
 Execute the program using runserver command.
 
 ## PROGRAM
+```
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Weekly Timetable</title>
+<style>
+  :root{
+    --bg:#f6f8fb;
+    --card:#ffffff;
+    --muted:#667085;
+    --accent:#334155;
+    --gap:12px;
+    --cell-padding:12px;
+    --radius:10px;
+  }
+  *{box-sizing:border-box;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;}
+  body{
+    margin:20px;
+    background:linear-gradient(180deg,var(--bg),#eef2f7);
+    color:var(--accent);
+  }
+
+  .container{
+    max-width:1000px;
+    margin:0 auto;
+  }
+
+  h1{font-size:1.4rem;margin:0 0 8px;}
+  p.note{color:var(--muted);margin:0 0 18px;font-size:0.95rem;}
+
+  .timetable{
+    width:100%;
+    border-collapse:collapse;
+    background:var(--card);
+    box-shadow:0 6px 20px rgba(20,30,60,0.06);
+    border-radius:var(--radius);
+    overflow:hidden;
+  }
+
+  .timetable thead th{
+    background:linear-gradient(180deg,#fafcff,#f3f6fb);
+    text-align:center;
+    padding:14px 10px;
+    font-weight:600;
+    font-size:0.95rem;
+    color:var(--accent);
+    border-bottom:1px solid #e6ecf5;
+  }
+
+  .timetable tbody td{
+    padding:var(--cell-padding);
+    border-bottom:1px dashed #edf2f8;
+    vertical-align:middle;
+    min-height:56px;
+  }
+
+  .day{
+    width:120px;
+    font-weight:600;
+    background:#fbfdff;
+    text-align:left;
+    padding-left:16px;
+  }
+
+  .slot{
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+
+  .subject{
+    padding:8px 10px;
+    border-radius:8px;
+    font-weight:600;
+    font-size:0.95rem;
+    color:white;
+    display:inline-block;
+    min-width:88px;
+    text-align:center;
+  }
+
+  /* color palette for subjects */
+  .english{background:#4f46e5;}     /* indigo */
+  .python{background:#059669;}      /* green */
+  .webapp{background:#0ea5e9;}      /* sky */
+  .html{background:#f97316;}        /* orange */
+  .empty{color:var(--muted);font-weight:500;}
+
+  /* responsive */
+  @media (max-width:760px){
+    .timetable thead{display:none;}
+    .timetable, .timetable tbody, .timetable tr, .timetable td{display:block;width:100%;}
+    .timetable tr{margin-bottom:14px;border-radius:10px;background:var(--card);box-shadow:0 4px 14px rgba(18,24,40,0.04);overflow:hidden;}
+    .timetable td{border:0;padding:12px 14px;}
+    .day{background:transparent;padding-left:0;}
+    .slot{flex-wrap:wrap;}
+  }
+
+  /* small helper */
+  .time{font-size:0.82rem;color:var(--muted);display:block;margin-bottom:6px;}
+</style>
+</head>
+<body>
+<center>
+<img src="logo.png" height="100" width="540">
+</center>
+<div class="container">
+  <h1>Weekly Timetable</h1>
+  <p class="note">Converted from your photo into a neat weekly timetable. Times on top row are the columns: <strong>08:00–10:00</strong>, <strong>10:00–12:00</strong>, <strong>13:00–15:00</strong>, <strong>15:00–17:00</strong>. Edit subjects directly in the HTML if you want to change anything.</p>
+
+  <table class="timetable" role="table" aria-label="Weekly timetable">
+    <thead>
+      <tr>
+        <th>Day / Time</th>
+        <th>08:00 - 10:00</th>
+        <th>10:00 - 12:00</th>
+        <th>13:00 - 15:00</th>
+        <th>15:00 - 17:00</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="day">Monday</td>
+        <td><div class="slot"><span class="time">08:00 - 10:00</span><span class="subject english">English</span></div></td>
+        <td><div class="slot"><span class="time">10:00 - 12:00</span><span class="empty">—</span></div></td>
+        <td><div class="slot"><span class="time">13:00 - 15:00</span><span class="subject webapp">Web Application</span></div></td>
+        <td><div class="slot"><span class="time">15:00 - 17:00</span><span class="subject python">Python</span></div></td>
+      </tr>
+
+      <tr>
+        <td class="day">Tuesday</td>
+        <td><div class="slot"><span class="time">08:00 - 10:00</span><span class="empty">—</span></div></td>
+        <td><div class="slot"><span class="time">10:00 - 12:00</span><span class="subject python">Python</span></div></td>
+        <td><div class="slot"><span class="time">13:00 - 15:00</span><span class="subject english">English</span></div></td>
+        <td><div class="slot"><span class="time">15:00 - 17:00</span><span class="empty">—</span></div></td>
+      </tr>
+
+      <tr>
+        <td class="day">Wednesday</td>
+        <td><div class="slot"><span class="time">08:00 - 10:00</span><span class="subject english">English</span></div></td>
+        <td><div class="slot"><span class="time">10:00 - 12:00</span><span class="subject webapp">Web Application</span></div></td>
+        <td><div class="slot"><span class="time">13:00 - 15:00</span><span class="empty">—</span></div></td>
+        <td><div class="slot"><span class="time">15:00 - 17:00</span><span class="subject html">Web / HTML</span></div></td>
+      </tr>
+
+      <tr>
+        <td class="day">Thursday</td>
+        <td><div class="slot"><span class="time">08:00 - 10:00</span><span class="empty">—</span></div></td>
+        <td><div class="slot"><span class="time">10:00 - 12:00</span><span class="empty">—</span></div></td>
+        <td><div class="slot"><span class="time">13:00 - 15:00</span><span class="subject english">English</span></div></td>
+        <td><div class="slot"><span class="time">15:00 - 17:00</span><span class="subject webapp">Web / HTML</span></div></td>
+      </tr>
+
+      <tr>
+        <td class="day">Friday</td>
+        <td><div class="slot"><span class="time">08:00 - 10:00</span><span class="subject english">English</span></div></td>
+        <td><div class="slot"><span class="time">10:00 - 12:00</span><span class="subject python">Python</span></div></td>
+        <td><div class="slot"><span class="time">13:00 - 15:00</span><span class="subject english">English (revise)</span></div></td>
+        <td><div class="slot"><span class="time">15:00 - 17:00</span><span class="subject english">English (practice)</span></div></td>
+      </tr>
+
+      <tr>
+        <td class="day">Saturday</td>
+        <td><div class="slot"><span class="time">08:00 - 10:00</span><span class="subject python">Python</span></div></td>
+        <td><div class="slot"><span class="time">10:00 - 12:00</span><span class="empty">—</span></div></td>
+        <td><div class="slot"><span class="time">13:00 - 15:00</span><span class="subject webapp">Web Application</span></div></td>
+        <td><div class="slot"><span class="time">15:00 - 17:00</span><span class="subject python">Python</span></div></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>
+```
 
 
 ## OUTPUT
+<img width="1287" height="934" alt="image" src="https://github.com/user-attachments/assets/935e2c2b-d771-409b-b32c-9836020bc5d8" />
 
 
 ## RESULT
